@@ -31,6 +31,7 @@
 * {
     margin: 0;
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 .wrapper {
@@ -38,6 +39,7 @@
     height: 100vh;
     margin: 0 auto;
     font-family: "Lato", sans-serif;
+    
 }
 
 .header {
@@ -46,6 +48,8 @@
     height: 95px;
     padding: 0 40px;
     border-bottom: 6px solid #323746 ;
+    position: fixed;
+    margin-top: -95px;
 }
 
 .header-logo {
@@ -70,7 +74,7 @@
    display: flex;
 }
 
-.header-nav ul li a {
+nav ul li a {
     letter-spacing: 0.1pt;
     margin-top: 15px;
     text-decoration: none;
@@ -92,10 +96,15 @@
     color: #424657
 }
 
+.nav-text_active {
+    color: #f06c64
+}
+
 .slider_block {
     background-color: #f06c64;
     height: 600px;
     width: 1020px;
+    margin-top: 95px;
     display: flex;
     border-bottom: 6px solid #ce5e58;
 }
@@ -251,7 +260,7 @@
     grid-template-rows: 1fr 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 20px;
-    grid-row-gap: 16px;
+    grid-row-gap: 20px;
     overflow: hidden;
 }
 

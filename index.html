@@ -7,23 +7,23 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="wrapper">
+    <div class="wrapper" id="wrapper">
         <header class="header">
             <div class="header-logo">
                 <img src="./assets/SINGOLO.png" alt="Singolo">
             </div>
             <nav class="header-nav">
                 <ul>
-                    <li><span class="nav-text_hidden">·</span><a href="#">home</a> </li>
-                    <li><span>·</span><a href="#">services</a></li>
-                    <li><span>·</span><a href="#">portfolio</a></li>
-                    <li><span>·</span><a href="#">about</a></li>
-                    <li><span>·</span><a href="#">contact</a></li>
+                    <li><span class="nav-text_hidden">·</span><a class="nav-text_active" href="#home">home</a></li>
+                    <li><span>·</span><a href="#services">services</a></li>
+                    <li><span>·</span><a href="#portfolio">portfolio</a></li>
+                    <li><span>·</span><a href="#about">about</a></li>
+                    <li><span>·</span><a href="#contact">contact</a></li>
                 </ul>
             </nav>
         </header>
 
-        <section class="slider_block">
+        <section class="slider_block" id="home">
             <div class="slider_block-vertical_phone">
                 <a href="#"><img class="slider_block-left_arrow" src="./assets/arrow left.png" alt="left arrow" width="16px" height="27px"></a> 
                 <img src="./assets/iPhone Vertical.png" alt="vetrical phone" width="250px" height="480px">
@@ -34,7 +34,7 @@
             </div>
         </section>
 
-        <section class="our_services_block">
+        <section class="our_services_block" id="services">
             <div class="our_services_block-text">
                 <h1>Our Services</h1>
                 <p>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum.
@@ -139,7 +139,7 @@
             </div>
         </section>
 
-        <section class="portfolio">
+        <section class="portfolio" id="portfolio">
             
             <div class="portfolio-text">
                 <h2>Portfolio</h2>
@@ -171,7 +171,7 @@
             </div>
             
         </section>
-        <section class="aboutUs">
+        <section class="aboutUs" id="about">
 
             <div class="aboutUs-text">
                 <h2>About Us</h2>
@@ -239,7 +239,7 @@
 
         </section>
 
-        <section class="getAquote">
+        <section class="getAquote" id="contact">
 
             <div class="getAquote-text">
                 <h2>Get a Quote</h2>
@@ -305,5 +305,6 @@
                 </div>
         </footer>
     </div>
+    <script src="script.js"<></script>
 </body>
 </html>
