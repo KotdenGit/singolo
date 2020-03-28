@@ -9,7 +9,7 @@ function onScroll(event) {
 
     sects.forEach((el) => {
          console.log(el.offsetTop);
-        if (el.offsetTop < curPos && (el.offsetTop + el.offsetHeight) >= curPos) {
+        if ((el.offsetTop) < curPos && (el.offsetTop + el.offsetHeight) >= curPos) {
             links.forEach((a) => {
                 a.classList.remove('nav-text_active');
                 if (el.getAttribute('id') === a.getAttribute('href').substring(1)) {
@@ -20,140 +20,88 @@ function onScroll(event) {
     })
 }
 
-let items = document.querySelectorAll('.carousel .item');
-let currentItem = 0;
-let isEnabled = true;
 
-function changeCurrentItem(n) {
-	currentItem = (n + items.length) % items.length;
-}
+let blackScrenHor = document.querySelector('.blackscren-horizontal_phone').classList;
+let blackScrenVer = document.querySelector('.blackscren-vertical_phone').classList;
+let actButton = document.querySelector('.item').classList;;
 
-function hideItem(direction) {
-	isEnabled = false;
-	items[currentItem].classList.add(direction);
-	items[currentItem].addEventListener('animationend', function() {
-		this.classList.remove('active', direction);
-	});
-}
 
-function showItem(direction) {
-	items[currentItem].classList.add('next', direction);
-	items[currentItem].addEventListener('animationend', function() {
-		this.classList.remove('next', direction);
-		this.classList.add('active');
-		isEnabled = true;
-	});
-}
+document.querySelector('.button-vertical_phone').onclick = function() {
+    if (!(blackScrenVer.contains('show-elem'))&&!actButton.contains('active')) {
+		blackScrenVer.add('show-elem');
+	}else{
+			blackScrenVer.remove('show-elem');	
+		} 
+  }
 
-function nextItem(n) {
-	hideItem('to-left');
-	changeCurrentItem(n + 1);
-	showItem('from-right');
-}
-
-function previousItem(n) {
-	hideItem('to-right');
-	changeCurrentItem(n - 1);
-	showItem('from-left');
-}
-
-document.querySelector('.control.left').addEventListener('click', function() {
-	if (isEnabled) {
-		previousItem(currentItem);
+document.querySelector('.button-horizontal_phone').onclick = function() {
+    if (!(blackScrenHor.contains('show-elem'))&&!actButton.contains('active')) {
+		blackScrenHor.add('show-elem');
+	}else{
+		blackScrenHor.remove('show-elem');
 	}
-});
+  }  
+   
+function hideScreen() {
+	document.querySelector('.blackscren-vertical_phone').classList.remove('show-elem');
+	document.querySelector('.blackscren-horizontal_phone').classList.remove('show-elem');
+}
 
-document.querySelector('.control.right').addEventListener('click', function() {
-	if (isEnabled) {
-		nextItem(currentItem);
-	}
-});
 
-const swipedetect = (el) => {
+  let items = document.querySelectorAll('.items-container .slider_block');
+  let currentItem = 0;
+  let isEnabled = true;
   
-	let surface = el;
-	let startX = 0;
-	let startY = 0;
-	let distX = 0;
-	let distY = 0;
-	let startTime = 0;
-	let elapsedTime = 0;
+  function changeCurrentItem(n) {
+	  currentItem = (n + items.length) % items.length;
+  }
+  
+  function hideItem(direction) {
+	  isEnabled = false;
+	  items[currentItem].classList.add(direction);
+	  items[currentItem].addEventListener('animationend', function() {
+		  this.classList.remove('active', direction);
+		  this.classList.add('plus');
+	  });
+  }
+  
+  function showItem(direction) {
+	  items[currentItem].classList.add('next', direction);
+	  items[currentItem].addEventListener('animationend', function() {
+		  this.classList.remove('next', direction);
+		  this.classList.add('active');
+		  this.classList.remove('plus');
+		  isEnabled = true;
+	  });
+  }
+  
+  function nextItem(n) {
+	  hideItem('to-left');
+	  changeCurrentItem(n + 1);
+	  showItem('from-right');
+  }
+  
+  function previousItem(n) {
+	  hideItem('to-right');
+	  changeCurrentItem(n - 1);
+	  showItem('from-left');
+  }
+  
+  document.querySelector('.left_arrow').addEventListener('click', function() {
+	  if (isEnabled) {
+		  previousItem(currentItem);
+		  hideScreen ();
+	  }
+  });
+  
+  document.querySelector('.right_arrow').addEventListener('click', function() {
+	  if (isEnabled) {
+		  nextItem(currentItem);
+		  hideScreen ();
+	  }
+  });
 
-	let threshold = 150;
-	let restraint = 100;
-	let allowedTime = 300;
 
-	surface.addEventListener('mousedown', function(e){
-		startX = e.pageX;
-		startY = e.pageY;
-		startTime = new Date().getTime();
-		e.preventDefault();
-	}, false);
 
-	surface.addEventListener('mouseup', function(e){
-		distX = e.pageX - startX;
-		distY = e.pageY - startY;
-		elapsedTime = new Date().getTime() - startTime;
-		if (elapsedTime <= allowedTime){
-			if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){
-				if ((distX > 0)) {
-					if (isEnabled) {
-						previousItem(currentItem);
-					}
-				} else {
-					if (isEnabled) {
-						nextItem(currentItem);
-					}
-				}
-			}
-		}
-		e.preventDefault();
-	}, false);
 
-	surface.addEventListener('touchstart', function(e){
-		if (e.target.classList.contains('arrow') || e.target.classList.contains('control')) {
-			if (e.target.classList.contains('left')) {
-				if (isEnabled) {
-					previousItem(currentItem);
-				}
-			} else {
-				if (isEnabled) {
-					nextItem(currentItem);
-				}
-			}
-		}
-			var touchobj = e.changedTouches[0];
-			startX = touchobj.pageX;
-			startY = touchobj.pageY;
-			startTime = new Date().getTime();
-			e.preventDefault();
-	}, false);
 
-	surface.addEventListener('touchmove', function(e){
-			e.preventDefault();
-	}, false);
-
-	surface.addEventListener('touchend', function(e){
-			var touchobj = e.changedTouches[0];
-			distX = touchobj.pageX - startX;
-			distY = touchobj.pageY - startY;
-			elapsedTime = new Date().getTime() - startTime;
-			if (elapsedTime <= allowedTime){
-					if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){
-							if ((distX > 0)) {
-								if (isEnabled) {
-									previousItem(currentItem);
-								}
-							} else {
-								if (isEnabled) {
-									nextItem(currentItem);
-								}
-							}
-					}
-			}
-			e.preventDefault();
-	}, false);
-}
-
-var el = document.querySelector('.carousel');
-swipedetect(el);

@@ -46,7 +46,7 @@
     display: flex;
     background-color: #2d303a;
     height: 95px;
-    padding: 0 40px;
+    padding: 0 38.5px;
     border-bottom: 6px solid #323746 ;
     position: fixed;
     margin-top: -95px;
@@ -102,7 +102,7 @@ nav ul li a {
 }
 
 .container{
-    background-color: #f06c64;
+    position: relative;
 }
 
 .slider_block {
@@ -110,43 +110,81 @@ nav ul li a {
     height: 600px;
     width: 1020px;
     margin-top: 95px;
-    display: flex;
+    display: none;
+    animation: 0.5s ease-in-out;
+    position: absolute;
     border-bottom: 6px solid #ce5e58;
+}
+
+.active,
+.next
+ {
+    position: relative;  
+    display: block;
+}
+
+.item.to-left,
+.item.next,
+.item.to-right{
+    position: absolute;
+    top: -16%;
 }
 
 .blackscren-vertical_phone{
     background-color: #424657;
     display: inline-block;
     position: absolute;
-    margin-top: -0.5rem;
-    margin-left: -16.5em;
+    margin-top: -30.16rem;
+    margin-left: 7.75em;
     display: inline-block;
     height: 21em;
     width: 12em;
+    opacity: 0;
 }
 
 .blackscren-horizontal_phone{
     background-color: #424657;
     display: inline-block;
     position: absolute;
-    margin-top: -0.8em;
-    margin-left: 6.8em;
+    margin-top: -25.8em;
+    margin-left: 29.8em;
     height: 12.2em;
     width: 21.5em;
+    opacity: 0;
 }
 
-.slider_block-horizontal_phone {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    margin-left: 14%;
-    margin-bottom: 1%;
+.show-elem {
+    opacity: 1;
 }
- 
+
+.button-horizontal_phone {
+    position: absolute;
+    margin-top: -20.9em;
+    margin-left: 27.1em;
+    height: 2.5em;
+    width: 2.5em;
+    border-radius: 35%;
+    opacity: 0;
+    background-color: seagreen;
+}
+
+.button-vertical_phone {
+    position: absolute;
+    margin-top: -8.6em;
+    margin-left: 12.5em;
+    height: 2.5em;
+    width: 2.5em;
+    border-radius: 35%;
+    opacity: 0;
+    background-color: seagreen;
+}
+
+
+
 .slider_block-arrow {
     color:#c5453f; 
     font-size: 3em;
-    top: 23rem;
+    top: 21rem;
     display: inline-block;
     position: absolute;
 }
@@ -165,6 +203,42 @@ nav ul li a {
     margin-left: 2rem;
 }
 
+.to-left {
+    animation-name: left;
+  }
+  
+  .from-right {
+    animation-name: right;
+  }
+  
+  .to-right {
+    animation-name: right;
+    animation-direction: reverse;
+  }
+  
+  .from-left {
+    animation-name: left;
+    animation-direction: reverse;
+  }
+  
+  @keyframes left {
+    from {
+      left: 0;
+    }
+    to {
+      left: -100%;
+    }
+  }
+  
+  @keyframes right {
+    from {
+      left: 100%;
+    }
+    to {
+      left: 0;
+    }
+  }
+  
 .our_services_block {
     width: 1020px;
     height: 500px;
@@ -539,134 +613,11 @@ nav ul li a {
     border-radius: 44%;
 }
 
-.carousel {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    text-align: center;
-    transform: translate(-50%, -50%);
-  }
+
   
-  .items-container {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-  }
   
-  .item {
-    display: none;
-    position: relative;
-    animation: 0.5s ease-in-out;
-    margin: 0 auto;
-  }
   
-  .active,
-  .next {
-    display: block;
-  }
   
-  .next {
-    position: absolute;
-    top: 0;
-    width: 100%;
-  }
   
-  .description {
-    margin: 30px 20%;
-    font-size: 32px;
-    border: 2px solid black;
-    display: flex;
-    justify-content: space-between;
-  }
+ 
   
-  .project-name {
-    padding: 10px;
-  }
-  
-  .control {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 15%;
-    cursor: pointer;
-  }
-  
-  .control.left {
-    left: 0;
-    right: auto;
-  }
-  
-  .control.right {
-    right: 0;
-    left: auto;
-  }
-  
-  .arrow {
-    display: inline-block;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 84px;
-  }
-  
-  .arrow.right {
-    right: 50%;
-  }
-  
-  .to-left {
-    animation-name: left;
-  }
-  
-  .from-right {
-    animation-name: right;
-  }
-  
-  .to-right {
-    animation-name: right;
-    animation-direction: reverse;
-  }
-  
-  .from-left {
-    animation-name: left;
-    animation-direction: reverse;
-  }
-  
-  @keyframes left {
-    from {
-      left: 0;
-    }
-    to {
-      left: -100%;
-    }
-  }
-  
-  @keyframes right {
-    from {
-      left: 100%;
-    }
-    to {
-      left: 0;
-    }
-  }
-  
-  @media (max-width: 960px) {
-    .description {
-      flex-direction: column;
-      align-items: center;
-    }
-  }
-  
-  @media (max-width: 640px) {
-    .control > .arrow {
-      display: none;
-    }
-  
-    .project-name {
-      display: none;
-    }
-  
-    .description {
-      border: 0;
-    }
-  }
